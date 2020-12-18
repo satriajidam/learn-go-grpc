@@ -23,7 +23,49 @@ message CreateResponse {
   int64 id = 2;
 }
 
-service ToDoService {
-  rpc Create(CreateRequest) returns (CreateResponse);
+message ReadRequest {
+  string api = 1;
+  int64 id = 2;
 }
 
+message ReadResponse {
+  string api = 1;
+  ToDo toDo = 2;
+}
+
+message UpdateRequest {
+  string api = 1;
+  ToDo toDo = 2;
+}
+
+message UpdateResonse {
+  string api = 1;
+  int64 updated = 2;
+}
+
+message DeleteRequest {
+  string api = 1;
+  int64 id = 2;
+}
+
+message DeleteResponse {
+  string api = 1;
+  int64 deleted = 2;
+}
+
+message ReadAllRequest {
+  string api = 1;
+}
+
+message ReadAllResponse {
+  string api = 1;
+  repeated ToDo toDo = 2;
+}
+
+service ToDoService {
+  rpc Create(CreateRequest) returns (CreateResponse);
+  rpc Read(ReadRequest) returns (ReadResponse);
+  rpc Update(UpdateRequest) returns (UpdateResonse);
+  rpc Delete(DeleteRequest) returns (DeleteResponse);
+  rpc ReadAll(ReadAllRequest) returns (ReadAllResponse);
+}
